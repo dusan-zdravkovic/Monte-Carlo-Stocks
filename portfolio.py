@@ -1,4 +1,7 @@
-"Monte Carlo Stock simulation"
+"""
+Monte Carlo Stock simulation
+March 23, 2025
+"""
 
 import numpy as np
 import pandas as pd
