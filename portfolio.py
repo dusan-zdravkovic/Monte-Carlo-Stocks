@@ -10,11 +10,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
 
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+
 # from pandas_datareader import data as pdr - yahoo fianance no longer works directly
 import yfinance as yf
 from pandas_datareader import data as pdr
 
-yf.pdr_override()  # override pandas_datareader with yfinance
+# yf.pdr_override()  # override pandas_datareader with yfinance
+import requests
+
+# Custom session with User-Agent to bypass blocking
+session = requests.Session()
+session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+
+yf.pdr_override()  # Override pandas_datareader with yfinance
+yf.shared._requests = session  # Force yfinance to use the custom session
 
 
 # Import Data
