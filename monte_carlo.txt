@@ -1,3 +1,0 @@
-- Monte Carlo stocks simulation
-
-- connect to an API
