@@ -6,50 +6,56 @@ March 23, 2025
 
 import numpy as np
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import datetime as dt
-
-from dotenv import load_dotenv
 import os
+import requests
+from dotenv import load_dotenv
+import time  # Added import for time
 
 # Load environment variables
 load_dotenv()
-
-API_KEY = os.getenv("API_KEY")
-
-# from pandas_datareader import data as pdr - yahoo fianance no longer works directly
-import yfinance as yf
-from pandas_datareader import data as pdr
-
-# yf.pdr_override()  # override pandas_datareader with yfinance
-import requests
-
-# Custom session with User-Agent to bypass blocking
-session = requests.Session()
-session.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
-
-yf.pdr_override()  # Override pandas_datareader with yfinance
-yf.shared._requests = session  # Force yfinance to use the custom session
+API_KEY = os.getenv("TIINGO_API_KEY")
 
 
-# Import Data
-def get_data(stocks, start, end):
-    stockData = pdr.get_data_yahoo(stocks, start, end)
-    print(stockData.head())  # Check if data is retrieved properly
+def fetch_stock_data_tiingo(stock):
+    """Fetch historical stock data from Tiingo."""
+    headers = {"Content-Type": "application/json", "Authorization": f"Token {API_KEY}"}
+    end_date = dt.datetime.now().strftime("%Y-%m-%d")
+    start_date = (dt.datetime.now() - dt.timedelta(days=300)).strftime("%Y-%m-%d")
+    url = f"https://api.tiingo.com/tiingo/daily/{stock}/prices?startDate={start_date}&endDate={end_date}"
 
-    stockData = stockData["Close"]  # only interested in daily changes
-    returns = stockData.pct_change()
-    meanReturns = returns.mean()
-    covMatrix = returns.cov()
-    return meanReturns, covMatrix
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        df = pd.DataFrame(data)
+        df.set_index("date", inplace=True)
+        df.index = pd.to_datetime(df.index)
+        return df["close"]
+    else:
+        print(f"Failed to fetch data for {stock}: {response.status_code}")
+        return None
 
 
+def get_stock_data(stocks):
+    """Fetch and compile stock data into a DataFrame."""
+    stock_data = {stock: fetch_stock_data_tiingo(stock) for stock in stocks}
+    stock_df = pd.DataFrame({k: v for k, v in stock_data.items() if v is not None})
+
+    returns = stock_df.pct_change()
+    return returns.mean(), returns.cov()
+
+
+# Stock symbols
 stockList = ["CBA", "BHP", "TLS", "NAB", "WBC", "STO"]
 stocks = [stock + ".AX" for stock in stockList]
+
+# Date range
 endDate = dt.datetime.now()
 startDate = endDate - dt.timedelta(days=300)
 
-meanReturns, covMatrix = get_data(stocks, startDate, endDate)
+# Fetch stock data
+meanReturns, covMatrix = get_stock_data(stocks)
 
 print(meanReturns)
