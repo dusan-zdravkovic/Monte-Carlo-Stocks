@@ -2,3 +2,4 @@
 .env
 monte_carlo.txt
 secrets1.py
+__pycache__
