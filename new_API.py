@@ -37,3 +37,15 @@ print(name, stock_price)
 
 now = datetime.now().strftime("%H:%M:%S")
 print(f"As of {now}, {name} is trading at ${stock_price}.")
+
+high_price = float(stockdata["high"])
+low_price = float(stockdata["low"])
+price_float = float(stock_price)
+
+if price_float == high_price:
+    print("The stock is currently at the day's high.")
+elif price_float == low_price:
+    print("The stock is currently at the day's low.")
+else:
+    range_pos = (price_float - low_price) / (high_price - low_price)
+    print(f"The stock is trading at {range_pos:.1%} of today’s range.")
