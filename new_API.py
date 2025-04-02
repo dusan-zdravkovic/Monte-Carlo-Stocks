@@ -1,6 +1,7 @@
 import requests
 import time
 from secrets1 import key1
+from datetime import datetime
 
 ticker = "MSFT"
 
@@ -32,3 +33,7 @@ stock_price = get_stock_price(ticker, key1)
 name = stockdata["name"]
 
 print(name, stock_price)
+
+
+now = datetime.now().strftime("%H:%M:%S")
+print(f"As of {now}, {name} is trading at ${stock_price}.")
