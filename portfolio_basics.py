@@ -23,13 +23,13 @@ def get_stock_quote(ticker_symbol, api):
 stockdata = get_stock_quote(ticker, key1)
 stock_price = get_stock_price(ticker, key1)
 
-# exchange = stockdata['exchange']
-# currency = stockdata['currency']
-# open_price = stockdata['open']
-# high_price = stockdata['high']
-# low_price = stockdata['low']
-# close_price = stockdata['close']
-# volume = stockdata['volume']
+exchange = stockdata["exchange"]
+currency = stockdata["currency"]
+open_price = stockdata["open"]
+high_price = stockdata["high"]
+low_price = stockdata["low"]
+close_price = stockdata["close"]
+volume = stockdata["volume"]
 name = stockdata["name"]
 
 print(name, stock_price)
