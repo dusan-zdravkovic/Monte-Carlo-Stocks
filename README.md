@@ -78,17 +78,17 @@ End-of-year predicted price distribution for all 8 stocks, compared to real pric
 
 Monte Carlo simulation is a mathematical technique that allows us to account for uncertainty in forecasting models. In this project, we use it to simulate possible future stock prices by generating random price paths based on the **geometric Brownian motion** model.
 
-The simulated price \( S_t \) at time \( t \) is calculated as:
+The simulated price $S_t$ at time $t$ is calculated as:
 
-\[
-S_t = S_0 \times \exp\left(\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W_t\right)
-\]
+$$
+S_t = S_0 \times \exp\left[\left(\mu - \frac{1}{2}\sigma^2\right)t + \sigma W_t\right]
+$$
 
 Where:
-- \( S_0 \) is the initial stock price
-- \( \mu \) is the expected return (mean)
-- \( \sigma \) is the volatility (standard deviation of returns)
-- \( W_t \) is a Wiener process (standard Brownian motion)
+- $S_0$ is the initial stock price
+- $\mu$ is the expected return (mean)
+- $\sigma$ is the volatility (standard deviation of returns)
+- $W_t$ is a Wiener process (standard Brownian motion)
 
 ---
 
