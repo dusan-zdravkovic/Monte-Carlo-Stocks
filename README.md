@@ -28,3 +28,46 @@ This project uses real historical stock data to simulate possible future prices 
 
 ```plaintext
 AAPL, MSFT, GOOGL, TSLA, META, AMZN, DIS, PFE
+```
+
+---
+
+## 🌐 Real-Time API Integration
+
+This project integrates the **Twelve Data API** to fetch historical stock prices programmatically in **JSON format**. Using HTTP requests, Python retrieves structured data for each ticker, which is then processed using **Pandas DataFrames** for simulation.
+
+This automation ensures accuracy, real-world realism, and scalability for expanding the project with more tickers or timeframes.
+
+---
+
+## 📊 Visual Insights
+
+### 🔹 1. AAPL Single Stock Simulation
+
+Shows 100 Monte Carlo paths simulating Apple's stock price in 2022.
+
+![AAPL Simulation](aapl_simulation.png)
+
+---
+
+### 🔹 2. AAPL Distribution vs Actual Price
+
+Histogram of predicted end prices vs the actual price on 2022-03-01.
+
+![AAPL Distribution](aapl_distribution.png)
+
+---
+
+### 🔹 3. All Stock Simulations
+
+Each stock's simulated 1-year price evolution.
+
+![All Simulations](all_simulations.png)
+
+---
+
+### 🔹 4. All Final Price Distributions
+
+End-of-year predicted price distribution for all 8 stocks, compared to real prices.
+
+![All Distributions](all_distributions.png)
