@@ -1,3 +1,7 @@
+"""
+Learning how to use TwelveData Finance API
+"""
+
 import requests
 import time
 from secrets1 import key1
