@@ -2,7 +2,7 @@
 
 This project uses real historical stock data to simulate possible future prices using Monte Carlo methods. The goal is to visualize price uncertainty and understand how well such simulations could have predicted actual prices.
 
-- API/Data Souce: https://twelvedata.com
+- API/Data Source: https://twelvedata.com
 
 ---
 
